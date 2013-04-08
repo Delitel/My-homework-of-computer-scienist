@@ -1,11 +1,12 @@
 #include <iostream>
 
 #define TURN_SIZE 100
+typedef int data;
 
 struct Turn_type {
     int priority;
     data value;
-}
+};
 
 class turn {
     private:
@@ -17,14 +18,14 @@ class turn {
         ~turn();
         void turn_insert(int priority, data value);  // add an item
         void turn_max_delete();                      // remove the element with the highest priority
-        void turn_dump();                            // print queue
-        bool turn_is_empty();                        // determines whether the elements in the queue
+        void turn_dump () const;                     // print queue
+        bool turn_is_empty () const;                 // determines whether the elements in the queue
 };
 
 turn::turn() {
     mas_size = 0;
     for(int i = 0; i < TURN_SIZE; i++) {
-        mas_turn[i] = 0;
+        mas_turn[i] = {0, 0};
     }
 }
 

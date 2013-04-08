@@ -9,16 +9,16 @@ struct Turn_type {
 
 class turn {
     private:
-        Turn_type mas_turn [TURN_SIZE];              // массив, на основе которого реализуется очередь
-        int mas_size;                                // текущий размер очереди
-        void mas_regulation();                       // функция, упорядочивающая очередь
+        Turn_type mas_turn [TURN_SIZE];              // array, which is implemented on the basis of all
+        int mas_size;                                // the current size of the queue
+        void mas_regulation();                       // function, which orders all
     public:
-        turn();                                      // конструктор
-        ~turn();                                     // деструктор
-        void turn_insert(int priority, data value);  // добавить элемент
-        void turn_max_delete();                      // удалить элемент с максимальным приоритетом
-        void turn_dump();                            // распечатка очереди
-        bool turn_is_empty();                        // определяет, есть ли в очереди элементы
+        turn();
+        ~turn();
+        void turn_insert(int priority, data value);  // add an item
+        void turn_max_delete();                      // remove the element with the highest priority
+        void turn_dump();                            // print queue
+        bool turn_is_empty();                        // determines whether the elements in the queue
 };
 
 turn::turn() {

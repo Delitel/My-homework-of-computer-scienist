@@ -1,6 +1,8 @@
-#include <iostream>
+using namespace std;
 
-#define TURN_SIZE 100
+#include <iostream>
+#include <string>
+
 typedef int data;
 
 struct Queue_type {
@@ -8,9 +10,10 @@ struct Queue_type {
     data value;
 };
 
+
 class queue {                                                                                            //implementation
     private:
-        Queue_type mas_queue [TURN_SIZE];             // array, which is implemented on the basis of all
+        Queue_type* mas_queue;                        // pointer on first array's element
         int mas_size;                                 // the current size of the queue
         int mas_regulation(int num);                  // function, which orders all                              +
     public:
@@ -18,21 +21,34 @@ class queue {                                                                   
         void queue_insert(int priority, data value);  // add an item                                             +
         void queue_max_delete();                      // remove the element with the highest priority            +
         void queue_dump () const;                     // print queue                                             +
-        bool queue_is_empty () const;                 // determines whether the elements in the queue            -
+        bool queue_is_empty () const;                 // determines whether the elements in the queue            +
 };
 
 queue::queue() {
     mas_size = 0;
-    for(int i = 0; i < TURN_SIZE; i++) {
-        mas_queue[i] = {0, 0};
-    }
+    mas_queue = new Queue_type[1];
+    mas_queue[0] = {0, 0};
 }
 
 void queue::queue_insert(int priority, data value) {
     Queue_type cur = {priority, value};
     int number_in_mas_cur = mas_size;
-    mas_queue[number_in_mas_cur] = cur;
-    mas_size++;
+    if(mas_size == 0) {
+        mas_queue[0] = cur;
+        mas_size++;
+    } else {
+        Queue_type* mas_copy = new Queue_type[mas_size];
+        for(int i = 0; i < mas_size; i++) {
+            mas_copy[i] = mas_queue[i];
+        }
+        mas_queue = new Queue_type[mas_size + 1];
+        for(int i = 0; i < mas_size; i++) {
+            mas_queue[i] = mas_copy[i];
+        }
+        mas_queue[mas_size] = cur;
+        mas_size++;
+        delete[] mas_copy;
+    }
     while(1) {
         if(mas_size == 0) {
             break;
@@ -61,9 +77,13 @@ void queue::queue_dump() const {
 }
 
 void queue::queue_max_delete() {
-    mas_queue[0] = mas_queue[mas_size - 1];
-    mas_size--;
-    mas_regulation(0);
+    if(queue_is_empty() == 1) {
+
+    } else {
+        mas_queue[0] = mas_queue[mas_size - 1];
+        mas_size--;
+        mas_regulation(0);
+    }
 }
 
 int queue::mas_regulation(int num) {
@@ -89,3 +109,47 @@ int queue::mas_regulation(int num) {
     }
     return 0;
 }
+
+bool queue::queue_is_empty () const {
+    if(mas_size == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+int main() {
+    std::cout << "commands:" << std::endl;
+    std::cout << "insert - insert element in queue" << std::endl;
+    std::cout << "delete - delete max element of queue" << std::endl;
+    std::cout << "dump - print queue" << std::endl;
+    std::cout << "stop - exit" << std::endl;
+    queue queue;
+    while(1) {
+        std::cout << std::endl;
+        string command = " ";
+        std::cin >> command;
+        if(command.compare("stop") == 0) {
+            return 0;
+        } else if(command.compare("insert") == 0) {
+            std::cout << "enter element's priority";
+            std::cout << std::endl;
+            int priority;
+            std::cin >> priority;
+            std::cout << "enter element's value";
+            std::cout << std::endl;
+            data value;
+            std::cin >> value;
+            queue.queue_insert(priority, value);
+        } else if(command.compare("delete") == 0) {
+            queue.queue_max_delete();
+        } else if(command.compare("dump") == 0) {
+            queue.queue_dump();
+        } else {
+            std::cout << "unknow command";
+        }
+    }
+}
+

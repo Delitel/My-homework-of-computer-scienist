@@ -1,3 +1,5 @@
+#ifndef QUEUE_2_0_H
+#define QUEUE_2_0_H
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -25,3 +27,4 @@ class queue {                                                                   
         bool queue_is_empty () const;                 // determines whether the elements in the queue            +
 };
 
+#endif // QUEUE_2_0_H

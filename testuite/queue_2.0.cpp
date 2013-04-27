@@ -1,34 +1,10 @@
-using namespace std;
-
-#include <iostream>
-#include <string>
-#include <iomanip>
-
-typedef int data;
-
-struct Queue_type {
-    int priority;
-    data value;
-};
-
-
-class queue {                                                                                            //implementation
-    private:
-        Queue_type* mas_queue;                        // pointer on first array's element
-        int mas_size;                                 // the current size of the queue
-        int mas_regulation(int num);                  // function, which orders all                              +
-    public:
-        queue();
-        void queue_insert(int priority, data value);  // add an item                                             +
-        void queue_max_delete();                      // remove the element with the highest priority            +
-        void queue_dump () const;                     // print queue                                             +
-        bool queue_is_empty () const;                 // determines whether the elements in the queue            +
-};
+#include "queue_2.0.h"
 
 queue::queue() {
     mas_size = 0;
     mas_queue = new Queue_type[1];
-    mas_queue[0] = {0, 0};
+	mas_queue[0].priority = 0;
+	mas_queue[0].value = 0;
 }
 
 void queue::queue_insert(int priority, data value) {
@@ -98,7 +74,8 @@ int queue::mas_regulation(int num) {
     } else if(mas_queue[num].priority >= mas_queue[2 * num + 1].priority){
         mas_regulation(2 * num + 1);
     }
-    bubble = {0, 0};
+	bubble.priority = 0;
+	bubble.value = 0;
     if((2 * num + 2) >= mas_size){
     } else if(mas_queue[num].priority < mas_queue[2 * num + 2].priority) {
         bubble = mas_queue[num];
@@ -118,3 +95,4 @@ bool queue::queue_is_empty () const {
         return 0;
     }
 }
+

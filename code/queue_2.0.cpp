@@ -1,29 +1,4 @@
-using namespace std;
-
-#include <iostream>
-#include <string>
-#include <iomanip>
-
-typedef int data;
-
-struct Queue_type {
-    int priority;
-    data value;
-};
-
-
-class queue {                                                                                            //implementation
-    private:
-        Queue_type* mas_queue;                        // pointer on first array's element
-        int mas_size;                                 // the current size of the queue
-        int mas_regulation(int num);                  // function, which orders all                              +
-    public:
-        queue();
-        void queue_insert(int priority, data value);  // add an item                                             +
-        void queue_max_delete();                      // remove the element with the highest priority            +
-        void queue_dump () const;                     // print queue                                             +
-        bool queue_is_empty () const;                 // determines whether the elements in the queue            +
-};
+#include "queue_2.0.h"
 
 queue::queue() {
     mas_size = 0;
@@ -117,4 +92,8 @@ bool queue::queue_is_empty () const {
     } else {
         return 0;
     }
+}
+
+int main() {
+    return 0;
 }

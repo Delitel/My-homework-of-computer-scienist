@@ -2,6 +2,7 @@ using namespace std;
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 typedef int data;
 
@@ -66,12 +67,12 @@ void queue::queue_insert(int priority, data value) {
 void queue::queue_dump() const {
     std::cout << "priority";
     for(int i = 0; i < mas_size; i++) {
-        std::cout << " - " << "  " << mas_queue[i].priority;
+        std::cout << " - " << setw(5) << mas_queue[i].priority;
     }
     std::cout <<  std::endl;
     std::cout << "value   ";
     for(int i = 0; i < mas_size; i++) {
-        std::cout << " - " << mas_queue[i].value;
+        std::cout << " - " << setw(5) << mas_queue[i].value;
     }
     std::cout <<  std::endl;
 }

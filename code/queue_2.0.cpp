@@ -3,7 +3,8 @@
 queue::queue() {
     mas_size = 0;
     mas_queue = new Queue_type[1];
-    mas_queue[0] = {0, 0};
+	mas_queue[0].priority = 0;
+	mas_queue[0].value = 0;
 }
 
 void queue::queue_insert(int priority, data value) {
@@ -73,7 +74,8 @@ int queue::mas_regulation(int num) {
     } else if(mas_queue[num].priority >= mas_queue[2 * num + 1].priority){
         mas_regulation(2 * num + 1);
     }
-    bubble = {0, 0};
+	bubble.priority = 0;
+	bubble.value = 0;
     if((2 * num + 2) >= mas_size){
     } else if(mas_queue[num].priority < mas_queue[2 * num + 2].priority) {
         bubble = mas_queue[num];
@@ -94,6 +96,3 @@ bool queue::queue_is_empty () const {
     }
 }
 
-int main() {
-    return 0;
-}
